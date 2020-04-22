@@ -311,10 +311,12 @@ float newTime = millis(); //time when the groundhog started moving
         groundhogLestY = groundhogY;
         lastTime = newTime;
         floor++;
-        //println(floor);
-        if(floor < 21){
+        println(floor);
+        if(floor <= 20 ){
           moveMode = true;
           cameraOffsetY -= ONE_BLOCK;
+        }else{
+          floor = 20;
         }
       }
     }
