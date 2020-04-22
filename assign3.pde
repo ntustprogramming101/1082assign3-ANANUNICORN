@@ -138,13 +138,13 @@ void draw() {
       if(i > 8 && i <= 16){
         for(int j = 40; j <= width; j+= 80){
           for(int k = (i + 2) * ONE_BLOCK - 40; k <= 18 * ONE_BLOCK - 40; k += 80){
-            if(int(j) / 80 % 4 == 1 || int(j) / 80 % 4 == 2){
-              if(int(k) / 80 % 4 == 1 || int(k) / 80 % 4 == 2){
+            if(int(j / 80 % 4) == 1 || int(j / 80 % 4) == 2){
+              if(int(k / 80 % 4) == 1 || int(k / 80 % 4) == 2){
                 image(stone1, j, k);
               }
             }
-            if(int(j) / 80 % 4 == 0 || int(j) / 80 % 4 == 3){
-              if(int(k) / 80 % 4 == 0 || int(k) / 80 % 4 == 3){
+            if(int(j / 80 % 4) == 0 || int(j / 80 % 4) == 3){
+              if(int(k / 80 % 4) == 0 || int(k / 80 % 4) == 3){
                 image(stone1, j, k);
               }
             }            
@@ -155,26 +155,26 @@ void draw() {
         for(int j = 40; j <= width; j+= 80){
           for(int k = (i + 2) * ONE_BLOCK - 40; k <= 26 * ONE_BLOCK - 40; k += 80){
             
-              if(int(k) / 80 % 3 == 0){
-                if(int(j) / 80 % 3 == 1 || int(j) / 80 % 3 == 2){
+              if(int(k / 80 % 3) == 0){
+                if(int(j / 80 % 3) == 1 || int(j / 80 % 3) == 2){
                 image(stone1, j, k);
-                if(int(j) / 80 % 3 == 2){
+                if(int(j / 80 % 3) == 2){
                   image(stone2, j, k);
                 }
               }
             }
               if(int(k) / 80 % 3 == 1){
-                if(int(j) / 80 % 3 == 0 || int(j) / 80 % 3 == 1){
+                if(int(j / 80 % 3) == 0 || int(j / 80 % 3) == 1){
                 image(stone1, j, k);
-                if(int(j) / 80 % 3 == 1){
+                if(int(j / 80 % 3) == 1){
                   image(stone2, j, k);
                 }
               }
             }
-              if(int(k) / 80 % 3 == 2){
-                if(int(j) / 80 % 3 == 0 || int(j) / 80 % 3 == 2){
+              if(int(k / 80 % 3) == 2){
+                if(int(j / 80 % 3) == 0 || int(j / 80 % 3) == 2){
                 image(stone1, j, k);
-                if(int(j) / 80 % 3 == 0){
+                if(int(j / 80 % 3) == 0){
                   image(stone2, j, k);
                 }                
               }
