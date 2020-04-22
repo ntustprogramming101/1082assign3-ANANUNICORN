@@ -1,4 +1,6 @@
-final int GAME_START = 0, GAME_RUN = 1, GAME_OVER = 2;
+final int GAME_START = 0;
+final int GAME_RUN = 1;
+final int GAME_OVER = 2;
 int gameState = 0;
 
 final int GRASS_HEIGHT = 15;
@@ -25,26 +27,31 @@ boolean downPressed = false;
 boolean leftPressed = false;
 boolean rightPressed = false;
 
-PImage title, gameover, startNormal, startHovered, restartNormal, restartHovered;
-PImage bg, soil8x24, lifeImg, stone1, stone2;
+PImage title, gameover;
+PImage startNormal, startHovered;
+PImage restartNormal, restartHovered;
+PImage bg, soil8x24, lifeImg;
 
+PImage stone1, stone2;
 
 PImage groundhogImg;
 PImage groundhogDownImg;
 PImage groundhogLeftImg;
 PImage groundhogRightImg;
 
-// For debug function; DO NOT edit or remove this!
+// For debug function
 int playerHealth = 2;
 float cameraOffsetY = 0;
 boolean debugMode = false;
 boolean moveMode = false;
 
+
 void setup() {
 	size(640, 480, P2D);
   x = 320;
   y = 240;
-	// Enter your setup code here (please put loadImage() here or your game will lag like crazy)
+  
+	// loadImage
 	bg = loadImage("img/bg.jpg");
 	title = loadImage("img/title.jpg");
 	gameover = loadImage("img/gameover.jpg");
@@ -73,6 +80,7 @@ void draw() {
       pushMatrix();
       translate(0, cameraOffsetY);
     }
+    
     /* ------ End of Debug Function ------ */
     if (moveMode || gameState == GAME_OVER) {
       pushMatrix();
@@ -102,23 +110,23 @@ void draw() {
 		}
 		break;
 
-		case GAME_RUN: // In-Game
+		case GAME_RUN: // In_Game
      imageMode(CENTER);
      image(bg,x,y);
   
-     //sun
+     // sun
      fill(253,184,19);
      stroke(255,255,0);
      strokeWeight(5);
      ellipse(x+270,y-190,120,120);
   
-     //grass
+     // grass
      fill(124,204,05);
      noStroke();
      rectMode(CENTER);
      rect(x,y-80,640,30);
      
-		// Soil - REPLACE THIS PART WITH YOUR LOOP CODE!
+    // soil
 		image(soil8x24, x, y+880);
     
     for(int i = 0; i < 24; i++){
@@ -127,16 +135,16 @@ void draw() {
           image(stone1, j, j + 160);
         }
       }
-      if(i >8 && i <= 16){
+      if(i > 8 && i <= 16){
         for(int j = 40; j <= width; j+= 80){
-          for(int k = (i+2)*ONE_BLOCK-40; k <= 18*ONE_BLOCK-40; k+= 80){
-            if(j/80%4 == 1 || j/80%4 == 2){
-              if(k/80%4== 1 || k/80%4 == 2){
+          for(int k = (i + 2) * ONE_BLOCK - 40; k <= 18 * ONE_BLOCK - 40; k += 80){
+            if(j / 80 % 4 == 1 || j / 80 % 4 == 2){
+              if(k / 80 % 4 == 1 || k / 80 % 4 == 2){
                 image(stone1, j, k);
               }
             }
-            if(j/80%4 == 0 || j/80%4 == 3){
-              if(k/80%4== 0 || k/80%4 == 3){
+            if(j / 80 % 4 == 0 || j / 80 % 4 == 3){
+              if(k / 80 % 4 == 0 || k / 80 % 4 == 3){
                 image(stone1, j, k);
               }
             }            
@@ -145,29 +153,29 @@ void draw() {
       }
       if(i >16 && i <= 24){
         for(int j = 40; j <= width; j+= 80){
-          for(int k = (i+2)*ONE_BLOCK-40; k <= 26*ONE_BLOCK-40; k+= 80){
+          for(int k = (i + 2) * ONE_BLOCK - 40; k <= 26 * ONE_BLOCK - 40; k += 80){
             
-              if(k/80%3== 0){
-                if(j/80%3 == 1 || j/80%3 == 2){
+              if(k / 80 % 3 == 0){
+                if(j / 80 % 3 == 1 || j / 80 % 3 == 2){
                 image(stone1, j, k);
-                if(j/80%3 == 2){
-                  image(stone2,j,k);
+                if(j / 80 % 3 == 2){
+                  image(stone2, j, k);
                 }
               }
             }
-              if(k/80%3== 1){
-                if(j/80%3 == 0 || j/80%3 == 1){
+              if(k / 80 % 3 == 1){
+                if(j / 80 % 3 == 0 || j / 80 % 3 == 1){
                 image(stone1, j, k);
-                if(j/80%3 == 1){
-                  image(stone2,j,k);
+                if(j / 80 % 3 == 1){
+                  image(stone2, j, k);
                 }
               }
             }
-              if(k/80%3== 2){
-                if(j/80%3 == 0 || j/80%3 == 2){
+              if(k / 80 % 3 == 2){
+                if(j / 80 % 3 == 0 || j / 80 % 3 == 2){
                 image(stone1, j, k);
-                if(j/80%3 == 0){
-                  image(stone2,j,k);
+                if(j / 80 % 3 == 0){
+                  image(stone2, j, k);
                 }                
               }
             }            
@@ -197,7 +205,8 @@ void draw() {
      if (downPressed == false && leftPressed == false && rightPressed == false) {
       image(groundhogImg, groundhogX, groundhogY, GROUNDHOG_W, GROUNDHOG_H);
     }
-    //draw the groundhogDown image between 1-14 frames
+    
+    // draw the groundhogDown image between 1-14 frames
     if (downPressed) {
       actionFrame++;
       if (actionFrame > 0 && actionFrame < 15) {
@@ -208,6 +217,7 @@ void draw() {
         downPressed = false;
       }
     }
+    
     //draw the groundhogLeft image between 1-14 frames
     if (leftPressed) {
       actionFrame++;
@@ -219,6 +229,7 @@ void draw() {
         leftPressed = false;
       }
     }
+    
     //draw the groundhogRight image between 1-14 frames
     if (rightPressed) {
       actionFrame++;
@@ -230,6 +241,7 @@ void draw() {
         rightPressed = false;
       }
     }
+    
     if (moveMode) {
         popMatrix();
     }
