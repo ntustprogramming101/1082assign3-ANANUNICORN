@@ -163,7 +163,7 @@ void draw() {
                 }
               }
             }
-              if(int(k) / 80 % 3 == 1){
+              if(int(k / 80 % 3) == 1){
                 if(int(j / 80 % 3) == 0 || int(j / 80 % 3) == 1){
                 image(stone1, j, k);
                 if(int(j / 80 % 3) == 1){
