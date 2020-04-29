@@ -42,6 +42,8 @@ PImage groundhogRightImg;
 // For debug function
 int playerHealth = 2;
 float cameraOffsetY = 0;
+float cameraOffsetLestY;
+float cameraOffsetDebugY;
 boolean debugMode = false;
 boolean moveMode = false;
 
@@ -78,11 +80,11 @@ void draw() {
     */
     if (debugMode) {
       pushMatrix();
-      translate(0, cameraOffsetY);
+      translate(0, cameraOffsetDebugY);
     }
     
     /* ------ End of Debug Function ------ */
-    if (moveMode || gameState == GAME_OVER) {
+    if (gameState == GAME_OVER) {
       pushMatrix();
       translate(0, cameraOffsetY);
     }
@@ -119,7 +121,11 @@ void draw() {
      stroke(255,255,0);
      strokeWeight(5);
      ellipse(x+270,y-190,120,120);
-  
+
+    if (moveMode) {
+      pushMatrix();
+      translate(0, cameraOffsetY);
+    }
      // grass
      fill(124,204,05);
      noStroke();
@@ -211,9 +217,15 @@ void draw() {
       actionFrame++;
       if (actionFrame > 0 && actionFrame < 15) {
         groundhogY += ONE_BLOCK / 15.0;
+        if(floor<=20){
+          cameraOffsetY -= ONE_BLOCK / 15.0;
+        }
         image(groundhogDownImg, groundhogX, groundhogY, GROUNDHOG_W, GROUNDHOG_H);
       } else {
         groundhogY = groundhogLestY + ONE_BLOCK;
+        if(floor<=20){
+          cameraOffsetY = cameraOffsetLestY - ONE_BLOCK;
+        }
         downPressed = false;
       }
     }
@@ -313,12 +325,13 @@ float newTime = millis(); //time when the groundhog started moving
         downPressed = true;
         actionFrame = 0;
         groundhogLestY = groundhogY;
+        cameraOffsetLestY = cameraOffsetY;
         lastTime = newTime;
         floor++;
         //println(floor);
         if(floor <= 20 ){
           moveMode = true;
-          cameraOffsetY -= ONE_BLOCK;
+          //cameraOffsetY -= ONE_BLOCK;
         }
       }
     }
@@ -347,12 +360,12 @@ float newTime = millis(); //time when the groundhog started moving
 
       case 'w':
       debugMode = true;
-      cameraOffsetY += 25;
+      cameraOffsetDebugY += 25;
       break;
 
       case 's':
       debugMode = true;
-      cameraOffsetY -= 25;
+      cameraOffsetDebugY -= 25;
       break;
 
       case 'a':
